@@ -6,7 +6,7 @@
 /*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 12:04:15 by nibernar          #+#    #+#             */
-/*   Updated: 2023/09/23 18:03:02 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:36:13 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@
 
 typedef struct s_parsing
 {
-	char	*NO_path;
-	char	*SO_path;
-	char	*WE_path;
-	char	*EA_path;
-	char	*F;
-	char	*C;
-	char	*str;
+	int		nbr_info;
+	int		trimed;
+	char	*north_texture;
+	char	*south_texture;
+	char	*west_texture;
+	char	*east_texture;
+	char	*floor_color;
+	char	*ceiling_color;
+	char	**file;
 	char	**map;
 }	t_parsing;
 

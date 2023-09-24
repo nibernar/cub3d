@@ -6,7 +6,7 @@
 /*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 20:41:38 by nicolasbern       #+#    #+#             */
-/*   Updated: 2023/09/23 19:04:19 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/09/24 11:23:27 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,10 @@ static char	*ft_strjoin_gnl(char const *s1, char const *s2)
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (0);
-	i = 0;
+	i = -1;
 	j = 0;
-	while (s1[i])
-	{
+	while (s1[++i])
 		str[i] = s1[i];
-		i++;
-	}
 	while (s2[j])
 	{
 		str[i + j] = s2[j];

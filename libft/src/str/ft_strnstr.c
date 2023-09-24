@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
+/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 13:31:30 by nibernar          #+#    #+#             */
-/*   Updated: 2023/08/04 22:56:56 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/09/24 12:34:20 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * but it also adds a search limit to specify the maximum number of characters to examine.
  * 
  * @param str The string 'str' to search.
- * @param to_find The tring 'to_find'.
+ * @param to_find The string 'to_find'.
  * @return Returns a pointer to the first occurrence of the character. 
  * If string 'to_find' is not found in the string 'str', the function returns NULL.
  */
