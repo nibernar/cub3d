@@ -6,7 +6,7 @@
 /*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 15:49:52 by nibernar          #+#    #+#             */
-/*   Updated: 2023/09/24 17:42:48 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/09/25 11:17:46 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,21 +78,17 @@ int		take_path(char *map, t_parsing *parsing, int flag)
 
 int	take_information(char *map, t_parsing *parsing)
 {
-	if ((ft_strlen("NO ./path_to_the_north_texture") == ft_strlen(map)) \
-	&& (ft_strncmp("NO ./path_to_the_north_texture", map, 30) == 0))
+	if (ft_strncmp("NO ./", map, 5) == 0)
 		return (take_path(map, parsing, 1));
-	else if ((ft_strlen("SO ./path_to_the_south_texture") == ft_strlen(map)) \
-	&& (ft_strncmp("SO ./path_to_the_south_texture", map, 30) == 0))
+	else if (ft_strncmp("SO ./", map, 5) == 0)
 		return (take_path(map, parsing, 2));
-	else if ((ft_strlen("WE ./path_to_the_west_texture") == ft_strlen(map)) \
-	&& (ft_strncmp("WE ./path_to_the_west_texture", map, 29) == 0))
+	else if (ft_strncmp("WE ./", map, 5) == 0)
 		return (take_path(map, parsing, 3));
-	else if ((ft_strlen("EA ./path_to_the_east_texture") == ft_strlen(map)) \
-	&& (ft_strncmp("EA ./path_to_the_east_texture", map, 29) == 0))
+	else if (ft_strncmp("EA ./", map, 5) == 0)
 		return (take_path(map, parsing, 4));
-	else if ((ft_strlen("F ") == 2) && (ft_strncmp("F ", map, 2) == 0))
+	else if (ft_strncmp("F ", map, 2) == 0)
 		return (take_path(map, parsing, 5));
-	else if ((ft_strlen("C ") == 2) && (ft_strncmp("C ", map, 2) == 0))
+	else if (ft_strncmp("C ", map, 2) == 0)
 		return (take_path(map, parsing, 6));
 	if (map[0] != '\0')
 	{
@@ -126,15 +122,46 @@ int	check_and_trim(char *file, t_parsing *parsing)
 	return (EXIT_SUCCESS);
 }
 
-void	build_map(char **str)
+int	check_double_map(char *str)
 {
 	int	i;
 
 	i = 0;
+	printf("|%s|\n", str);
+	if (str[0] == '\0')
+		return (EXIT_FAILURE);
+	while(str[i])
+	{
+		if (!ft_isspace(str[i]))
+			return (EXIT_SUCCESS);
+		i++;
+	}
+	return (EXIT_FAILURE);
+}
+
+void	build_map(char **str)
+{
+	int	i;
+	int j;
+
+	i = 0;
 	while (str[i])
 	{
-		printf("%s\n", str[i++]);
-		usleep(500000);
+		j = 0;
+		while (str[i][j])
+		{
+			//check les '\0
+			if (ft_isspace(str[i][0]))
+			{
+				if (check_double_map(str[i]))
+				{
+					printf("ERROR map\n");
+					return ;
+				}
+			}
+			j++;
+		}
+		i++;
 	}
 }
 
