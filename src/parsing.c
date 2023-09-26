@@ -3,23 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 15:49:52 by nibernar          #+#    #+#             */
-/*   Updated: 2023/09/25 11:17:46 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/09/26 23:13:31 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+void	free_struct_parsing(t_parsing *parsing)
+{
+	int	i;
+
+	i = 0;
+	free(parsing->north_texture);
+	free(parsing->south_texture);
+	free(parsing->west_texture);
+	free(parsing->east_texture);
+	free(parsing->floor_color);
+	free(parsing->ceiling_color);
+	while (parsing->map[i])
+		free (parsing->map[i++]);
+	free (parsing->map);
+	
+}
+
 void	print_struct(t_parsing *parsing)
 {
+	int	i;
 	printf("%s\n", parsing->north_texture);
 	printf("%s\n", parsing->south_texture);
 	printf("%s\n", parsing->west_texture);
 	printf("%s\n", parsing->east_texture);
 	printf("%s\n", parsing->floor_color);
 	printf("%s\n", parsing->ceiling_color);
+	if (parsing->map)
+	{
+		i = 0;
+		while (parsing->map[i])
+			printf("%s\n", parsing->map[i++]);
+	}
 }
 
 static int	check_extention(char *str)
@@ -61,17 +85,17 @@ static char	**build_file(int fd)
 int		take_path(char *map, t_parsing *parsing, int flag)
 {
 	if (flag == 1)
-		parsing->north_texture = map;
+		parsing->north_texture = ft_strdup(map);
 	if (flag == 2)
-		parsing->south_texture = map;
+		parsing->south_texture = ft_strdup(map);
 	if (flag == 3)
-		parsing->west_texture = map;
+		parsing->west_texture = ft_strdup(map);
 	if (flag == 4)
-		parsing->east_texture = map;
+		parsing->east_texture = ft_strdup(map);
 	if (flag == 5)
-		parsing->floor_color = map;
+		parsing->floor_color = ft_strdup(map);
 	if (flag == 6)
-		parsing->ceiling_color = map;
+		parsing->ceiling_color = ft_strdup(map);
 	parsing->nbr_info++;
 	return (EXIT_SUCCESS);
 }
@@ -127,9 +151,6 @@ int	check_double_map(char *str)
 	int	i;
 
 	i = 0;
-	printf("|%s|\n", str);
-	if (str[0] == '\0')
-		return (EXIT_FAILURE);
 	while(str[i])
 	{
 		if (!ft_isspace(str[i]))
@@ -139,7 +160,7 @@ int	check_double_map(char *str)
 	return (EXIT_FAILURE);
 }
 
-void	build_map(char **str)
+char	**build_map(char **str)
 {
 	int	i;
 	int j;
@@ -147,55 +168,60 @@ void	build_map(char **str)
 	i = 0;
 	while (str[i])
 	{
+		if (str[i][0] == '\0')
+		{
+			printf("ERROR map\n");
+			return (NULL);
+		}
 		j = 0;
 		while (str[i][j])
 		{
-			//check les '\0
 			if (ft_isspace(str[i][0]))
 			{
 				if (check_double_map(str[i]))
 				{
 					printf("ERROR map\n");
-					return ;
+					return (NULL);
 				}
 			}
 			j++;
 		}
 		i++;
 	}
+	return (str);
 }
 
-int build_parsing(int fd, t_parsing *parsing)
+int build_parsing(int fd, t_data *data)
 {
 	char		*str;
 	int			i;
 
 	i = 0;
 	str = NULL;
-	parsing->nbr_info = 0;
-	parsing->trimed = 0;
-	parsing->file = build_file(fd);
-	while (parsing->file[i] && parsing->nbr_info < 6)
+	data->parsing.nbr_info = 0;
+	data->parsing.trimed = 0;
+	data->parsing.file = build_file(fd);
+	while (data->parsing.file[i] && data->parsing.nbr_info < 6)
 	{
-		str = ft_strtrim(parsing->file[i], " \t");
-		if (take_information(str, parsing))
+		str = ft_strtrim(data->parsing.file[i], " \t");
+		if (take_information(str, &data->parsing))
+			return (EXIT_FAILURE);
+		free(str);
+		i++;
+	}
+	while (data->parsing.file[i] && data->parsing.trimed == 0)
+	{
+		if (check_and_trim(data->parsing.file[i], &data->parsing))
 			return (EXIT_FAILURE);
 		i++;
 	}
-	while (parsing->file[i] && parsing->trimed == 0)
-	{
-		if (check_and_trim(parsing->file[i], parsing))
-			return (EXIT_FAILURE);
-		i++;
-	}
-	build_map(&parsing->file[i - 1]);
-	//print_struct(parsing);
+	data->parsing.map = build_map(&data->parsing.file[i - 1]);
+	//print_struct(&data->parsing);
 	return (EXIT_SUCCESS);
 }
 
 int	parse_map(int argc, char **argv, t_data *data)
 {
-	t_parsing	parsing;
 	int			fd;
 
 	fd = 0;
@@ -210,8 +236,9 @@ int	parse_map(int argc, char **argv, t_data *data)
 		printf(".cub needed\n");
 		return (EXIT_FAILURE);
 	}
-	if (build_parsing(fd, &parsing))
-		printf("helo\n");
+	if (build_parsing(fd, data))
+		return (EXIT_FAILURE);
+	//free_struct_parsing(&parsing);
 	//if (check_args_map())
 	return (EXIT_SUCCESS);
 }
