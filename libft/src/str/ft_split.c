@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:16:44 by nibernar          #+#    #+#             */
-/*   Updated: 2023/08/04 21:24:26 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/09/26 17:18:29 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ static int	ft_words_size(char const *s, char c)
 	while (s[i])
 	{
 		if (s[i] == c)
-		{
-			while (s[i] == c)
 			i++;
-		}
 		if (s[i] == '\0')
 			break ;
 		while (s[i] && s[i] != c)
@@ -84,10 +81,7 @@ static char	**ft_create_words_tab(const char *s, char **tab, char c, int i)
 	while (s[i])
 	{
 		if (s[i] == c)
-		{
-			while (s[i] == c)
 				i++;
-		}
 		if (s[i] == '\0')
 			break ;
 		index = i;

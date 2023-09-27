@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:24:09 by nibernar          #+#    #+#             */
-/*   Updated: 2023/08/04 22:36:51 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/09/25 21:00:27 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
  * 
  * @param s The string 's' to copy.
  * @param start The index 'start' where the new string begins.
+ * @param len The 'len' of the new string.
  * @return The new string or returns NULL if the allocation fails.
  */
 char	*ft_substr(char const *s, unsigned int start, size_t len)
