@@ -6,7 +6,7 @@
 /*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 15:49:52 by nibernar          #+#    #+#             */
-/*   Updated: 2023/09/25 11:17:46 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/09/26 10:30:51 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,10 @@ void	build_map(char **str)
 	while (str[i])
 	{
 		j = 0;
+		printf("|%s|\n", str[i]);
+		//if (str[i][0] == '\n')
 		while (str[i][j])
 		{
-			//check les '\0
 			if (ft_isspace(str[i][0]))
 			{
 				if (check_double_map(str[i]))
@@ -189,7 +190,7 @@ int build_parsing(int fd, t_parsing *parsing)
 		i++;
 	}
 	build_map(&parsing->file[i - 1]);
-	//print_struct(parsing);
+	print_struct(parsing);
 	return (EXIT_SUCCESS);
 }
 
