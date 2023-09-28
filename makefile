@@ -6,7 +6,7 @@
 #    By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 12:02:24 by nibernar          #+#    #+#              #
-#    Updated: 2023/09/26 16:39:39 by nicolasbern      ###   ########.fr        #
+#    Updated: 2023/09/28 11:24:07 by nicolasbern      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,13 @@ LIBFT_LIB	=	$(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
 
 SRC_DIR		=	./src/
 
-SRCS		=	cub.c\
+SRCS		=	cub3d.c\
 				parsing.c\
+				free_data.c\
+				print_data.c\
+				check_parsing.c\
+				take_info_struct.c\
+				draw_map.c\
 				
 SRC			=	$(addprefix $(SRC_DIR),$(SRCS))
 
@@ -41,23 +46,23 @@ OBJ			=	$(SRC:.c=.o)
 # 	COMPILER OPTIONS	#
 #########################
 
-CC			=	clang
+CC			=	cc
 FLAG		=	-Wall -Wextra -Werror -g3
 
 
-#########################
-#	 MLX FOLDERS		#
-#########################
+########################
+#	 MLX FOLDERS	   #
+########################
 
 MLX_FILE	=	libmlx.a
 
-#macOs
-MLX_FLAG	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
-MLX_PATH	=	./mlx/
+# macOs
+MLX_FLAG	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
+MLX_PATH	=	./mlx_macos/
 
 #Linux
-#MLX_FLAG	=	-L ./mlx -lXext -lX11 -lm -lbsd
-#MLX_PATH	=	./MLX_extention/Lib_MLX/
+# MLX_FLAG	=	-L ./mlx -lmlx -lXext -lX11 -lm -lbsd
+# MLX_PATH	=	./mlx_linux/
 
 MLX_LIB		=	$(addprefix $(MLX_PATH), $(MLX_FILE))
 MLX_EX		=	$(MLX_LIB) $(MLX_FLAG)
@@ -65,11 +70,15 @@ MLX_EX		=	$(MLX_LIB) $(MLX_FLAG)
 
 INC_DIR		=	./include/
 
+SRC			=	$(addprefix $(SRC_DIR),$(SRCS))
+
+OBJ			=	$(SRC:.c=.o)
+
 
 #########################
 # 		RULES			#
 #########################
-
+	
 all: lib mlx $(NAME)
 
 %.o: %.c ${INC_DIR} -I cub3d.h
@@ -115,3 +124,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re lib mlx
+

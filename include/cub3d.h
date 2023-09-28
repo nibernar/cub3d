@@ -6,25 +6,28 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 12:04:15 by nibernar          #+#    #+#             */
-/*   Updated: 2023/09/27 00:18:15 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/09/28 11:30:03 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 #define CUB3D_H
 
-# include <stdio.h>
-# include <math.h>
 # include "../libft/include/libft.h"
-//macos
-# include "../mlx/mlx.h"
-//linux
-# include "../MLX_extention/Lib_MLX/mlx.h"
-# include "../mlx/mlx.h"
+//# include "../mlx_linux/mlx.h"
+# include "../mlx_macos/mlx.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <string.h>
+# include <fcntl.h>
 
-# define MAP_ZOOM 15
+# define MAP_ZOOM 20
+# define MAP_LENGTH 1080
+# define MAP_WIDTH 850
 
-typedef struct	s_image {
+
+typedef struct	s_image
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -58,7 +61,31 @@ typedef struct s_data
 *	Parsing  *
 *************/
 
-int	parse_map(int argc, char **argv, t_data *data);
+int		take_path(char *map, t_parsing *parsing, int flag);
+int		take_information(char *map, t_parsing *parsing);
+int		parse_map(int argc, char **argv, t_data *data);
+int		check_extention(char *str);
+int		check_double_map(char *str);
+int		check_and_trim(char *file, t_parsing *parsing);
+
+/*****************
+*	Draw_map     *
+*****************/
+
+void	mlx_print_map(t_data *data);
+void	draw_square(t_data *data, int x, int y, int color);
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
+
+/*************
+*	Free     *
+*************/
+
+void	free_struct_parsing(t_parsing *parsing);
+
+/*****************
+*	Print_data   *
+*****************/
+
 void	print_struct(t_parsing *parsing);
 
 #endif
