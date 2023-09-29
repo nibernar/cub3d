@@ -6,7 +6,7 @@
 /*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:33:06 by nibernar          #+#    #+#             */
-/*   Updated: 2023/09/27 15:36:02 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:39:04 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	free_struct_parsing(t_parsing *parsing)
 	free(parsing->ceiling_color);
 	while (parsing->map[i])
 		free (parsing->map[i++]);
-	free (parsing->map);
+	//free (parsing->map);
 }

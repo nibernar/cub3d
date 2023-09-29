@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
+/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 12:04:15 by nibernar          #+#    #+#             */
-/*   Updated: 2023/09/28 11:30:03 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/09/29 11:47:41 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #define CUB3D_H
 
 # include "../libft/include/libft.h"
-//# include "../mlx_linux/mlx.h"
-# include "../mlx_macos/mlx.h"
+# include "../mlx_linux/mlx.h"
+//# include "../mlx_macos/mlx.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
@@ -25,6 +25,16 @@
 # define MAP_LENGTH 1080
 # define MAP_WIDTH 850
 
+typedef enum e_key
+{
+	KEY_UP = 119,
+	KEY_DOWN = 115, 
+	KEY_RIGHT = 100, 
+	KEY_LEFT = 97,
+	KEY_ESC = 65307,
+	KEY_POV_RIGHT = 65363,
+	KEY_POV_LEFT = 65361,
+}	t_key;
 
 typedef struct	s_image
 {
