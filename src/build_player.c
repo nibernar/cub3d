@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
+/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:43:28 by nicolasbern       #+#    #+#             */
-/*   Updated: 2023/09/29 15:29:11 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/09/30 17:35:10 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,30 @@ int check_dir(char c)
 {
     return (c == 'N' || c == 'E' || c == 'S' || c == 'W');
 }
+
+// void    set_dir(t_data *data)
+// {
+//     if (data->player.dir == 'N')
+//     {
+//         data->player.direction.pos_x = -1;
+//         data->player.direction.pos_y = 0;
+//     }
+//     if (data->player.dir == 'S')
+//     {
+//         data->player.direction.pos_x = 1;
+//         data->player.direction.pos_y = 0;
+//     }
+//     if (data->player.dir == 'E')
+//     {
+//         data->player.direction.pos_x = 0;
+//         data->player.direction.pos_y = 1;
+//     }
+//     if (data->player.dir == 'W')
+//     {
+//         data->player.direction.pos_x = 0;
+//         data->player.direction.pos_y = -1;
+//     }
+// }
 
 void   player_pos(t_data *data)
 {
@@ -43,10 +67,12 @@ void   player_pos(t_data *data)
             if (check_dir(data->parsing.map[i][j]))
             {
                 data->player.dir = data->parsing.map[i][j];
+                data->parsing.map[i][j] = '0';
                 tmp_x = (float) i;
                 tmp_y = (float) j;
                 data->player.position.pos_x = tmp_x * MAP_ZOOM + MAP_ZOOM * 0.5;
                 data->player.position.pos_y = tmp_y * MAP_ZOOM + MAP_ZOOM * 0.5;
+                //set_dir(data);
             }
            j++;
         }

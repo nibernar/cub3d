@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
+/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 12:04:15 by nibernar          #+#    #+#             */
-/*   Updated: 2023/09/29 16:03:14 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/09/30 17:11:20 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,47 @@
 #define CUB3D_H
 
 # include "../libft/include/libft.h"
-//# include "../mlx_linux/mlx.h"
-# include "../mlx_macos/mlx.h"
+# include "../mlx_linux/mlx.h"
+//# include "../mlx_macos/mlx.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
+# include <math.h>
 
 # define MAP_ZOOM 16
 # define MAP_LENGTH 1080
 # define MAP_WIDTH 850
+# define MOOV_SPEED 3.5
+# define ROT_SPEED 0.1
+# define MINI_SIZE 10
+
+//# define const double PI = 3.1415926;
+
 
 //linux
-// typedef enum e_key
-// {
-// 	KEY_UP = 119,
-// 	KEY_DOWN = 115, 
-// 	KEY_RIGHT = 100, 
-// 	KEY_LEFT = 97,
-// 	KEY_ESC = 65307,
-// 	KEY_POV_RIGHT = 65363,
-// 	KEY_POV_LEFT = 65361,
-// }	t_key;
-
-//macos
-
-typedef struct s_pos
-{
-	float	pos_x;
-	float	pos_y;
-}	t_pos;
-
 typedef enum e_key
 {
-	KEY_UP = 13,
-	KEY_DOWN = 1, 
-	KEY_RIGHT = 2, 
-	KEY_LEFT = 0,
-	KEY_ESC = 53,
+	KEY_UP = 119,
+	KEY_DOWN = 115, 
+	KEY_RIGHT = 100, 
+	KEY_LEFT = 97,
+	KEY_ESC = 65307,
 	KEY_POV_RIGHT = 65363,
 	KEY_POV_LEFT = 65361,
 }	t_key;
+
+//macos
+// typedef enum e_key
+// {
+// 	KEY_UP = 13,
+// 	KEY_DOWN = 1, 
+// 	KEY_RIGHT = 2, 
+// 	KEY_LEFT = 0,
+// 	KEY_ESC = 53,
+// 	KEY_POV_RIGHT = 65363,
+// 	KEY_POV_LEFT = 65361,
+// }	t_key;
 
 typedef enum e_decor
 {
@@ -70,6 +70,12 @@ typedef struct	s_image
 	int		line_length;
 	int		endian;
 }				t_image;
+
+typedef struct s_pos
+{
+	float	pos_x;
+	float	pos_y;
+}	t_pos;
 
 typedef struct s_parsing
 {
@@ -88,6 +94,7 @@ typedef struct s_parsing
 typedef struct s_player
 {
 	t_pos	position;
+	t_pos	direction;
 	char	dir;
 }	t_player;
 
@@ -132,6 +139,9 @@ void	free_struct_parsing(t_parsing *parsing);
 
 void	print_struct(t_parsing *parsing);
 
-int check_dir(char c);
+int 	check_dir(char c);
+int		input(int key, t_data *data);
+void	moove_to(t_data *data, int flag);
+int		end_program(t_data *data);
 
 #endif
