@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:33:06 by nibernar          #+#    #+#             */
-/*   Updated: 2023/09/29 11:39:04 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:41:30 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,4 @@ void	free_struct_parsing(t_parsing *parsing)
 	free(parsing->ceiling_color);
 	while (parsing->map[i])
 		free (parsing->map[i++]);
-	//free (parsing->map);
 }

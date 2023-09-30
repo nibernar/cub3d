@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 15:49:52 by nibernar          #+#    #+#             */
-/*   Updated: 2023/09/27 15:41:28 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:44:05 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int	parse_map(int argc, char **argv, t_data *data)
 	}
 	if (build_parsing(fd, data))
 		return (EXIT_FAILURE);
-	//free_struct_parsing(&parsing);
+	if (build_player(data))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

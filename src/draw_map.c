@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:44:35 by nibernar          #+#    #+#             */
-/*   Updated: 2023/09/27 15:44:47 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/09/30 10:21:53 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,13 @@ void	mlx_print_map(t_data *data)
 			if (data->parsing.map[x][y] == '1')
 				draw_square(data, x * MAP_ZOOM, y * MAP_ZOOM, 0x00FF66FF);
 			if (data->parsing.map[x][y] == '0')
-				draw_square(data, x * MAP_ZOOM, y * MAP_ZOOM, 0x00FF00300);
+				draw_square(data, x * MAP_ZOOM, y * MAP_ZOOM, 0x00000000);
+			if (check_dir(data->parsing.map[x][y]))
+				draw_square(data, x * MAP_ZOOM, y * MAP_ZOOM, 0x000066FF);
 			y++;
 		}
 		x++;
 	}
+	my_mlx_pixel_put(&data->img, data->player.position.pos_y, data->player.position.pos_x, 0x0066FF00);
 	mlx_put_image_to_window(data->mlx, data->mlx_window, data->img.img, 0, 0);
 }
