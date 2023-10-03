@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:44:35 by nibernar          #+#    #+#             */
-/*   Updated: 2023/09/30 17:30:19 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:29:06 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,7 @@ void	draw_square(t_data *data, int x, int y, int color)
 
 void	draw_player(t_data *data)
 {
-		// int	coma_i;
-		// int	coma_j;
-
-		// coma_i = (data->player.position.pos_x - floor(data->player.position.pos_x)) * 10;
-		// coma_j = (data->player.position.pos_y - floor(data->player.position.pos_y)) * 10;
-		my_mlx_pixel_put(&data->img, data->player.position.pos_y, data->player.position.pos_x, 0x0066FF00);
+	my_mlx_pixel_put(&data->img, data->player.position.pos_y, data->player.position.pos_x, 0x0066FF00);
 }
 
 // static void	draw_player(t_data *data)
@@ -79,21 +74,21 @@ void	mlx_print_map(t_data *data)
 	int	x;
 	int	y;
 
-	x = 0;
-	while (data->parsing.map[x])
+	y = 0;
+	while (data->parsing.map[y])
 	{
-		y = 0;
-		while (data->parsing.map[x][y])
+		x = 0;
+		while (data->parsing.map[y][x])
 		{
-			if (data->parsing.map[x][y] == '1')
-				draw_square(data, x * MAP_ZOOM, y * MAP_ZOOM, 0x00FF66FF);
-			if (data->parsing.map[x][y] == '0')
-				draw_square(data, x * MAP_ZOOM, y * MAP_ZOOM, 0x00000000);
-			if (check_dir(data->parsing.map[x][y]))
-				draw_square(data, x * MAP_ZOOM, y * MAP_ZOOM, 0x000066FF);
-			y++;
+			if (data->parsing.map[y][x] == '1')
+				draw_square(data, y * MAP_ZOOM, x * MAP_ZOOM, 0x00FF66FF);
+			if (data->parsing.map[y][x] == '0')
+				draw_square(data, y * MAP_ZOOM, x * MAP_ZOOM, 0x00000000);
+			if (check_dir(data->parsing.map[y][x]))
+				draw_square(data, y * MAP_ZOOM, x * MAP_ZOOM, 0x000066FF);
+			x++;
 		}
-		x++;
+		y++;
 	}
 	draw_player(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_window, data->img.img, 0, 0);

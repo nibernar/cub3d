@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:00:53 by nibernar          #+#    #+#             */
-/*   Updated: 2023/09/30 17:35:34 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:17:13 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,40 +19,34 @@ int	end_program(t_data *data)
 	exit(EXIT_FAILURE);
 }
 
-void	moove_to(t_data *data, int flag)
+void	move_up(t_data *data)
 {
-	// if (data->parsing.map[(int)data->player.position.pos_x / MAP_ZOOM]\
-	// [(int)data->player.position.pos_y / MAP_ZOOM] == WALL)
-	// 	return ;
-	if (flag == 1)
-		data->player.position.pos_x = data->player.position.pos_x - 1 * MOOV_SPEED;
-	if (flag == 2)
-		data->player.position.pos_x = data->player.position.pos_x + 1 * MOOV_SPEED;
-	if (flag == 3)
-		data->player.position.pos_y = data->player.position.pos_y - 1 * MOOV_SPEED;
-	if (flag == 4)
-		data->player.position.pos_y = data->player.position.pos_y + 1 * MOOV_SPEED;
+	data->player.position.pos_x += data->player.direction.pos_x;
+	data->player.position.pos_y += data->player.direction.pos_y;
 }
 
-void	moove_rot_to(t_data *data, int flag)
+void	move_down(t_data *data)
 {
-	if (flag == 1)
-	{
-		printf("zgeg\n");
-		data->player.position.pos_x = data->player.position.pos_x * cos(- ROT_SPEED) - data->player.position.pos_y * sin(- ROT_SPEED);
-		data->player.position.pos_y = data->player.position.pos_y * cos(- ROT_SPEED) + data->player.position.pos_x * sin(- ROT_SPEED);
-		// data->player.position.pos_x = (int)(data->player.position.pos_x * cos(Phi * (PI / 180)) - data->player.position.pos_y * sin(Phi * (PI / 180)));
-		// data->player.position.pos_y = (int)(data->player.position.pos_x * cos(Phi * (PI / 180)) + data->player.position.pos_y * sin(Phi * (PI / 180)));
-	}
+	data->player.position.pos_x -= data->player.direction.pos_x;
+	data->player.position.pos_y -= data->player.direction.pos_y;
+}
 
-	if (flag == 2)
-	{
-		printf("zgeg2\n");
-		data->player.position.pos_x = data->player.position.pos_x * cos(ROT_SPEED) - data->player.position.pos_y * sin(ROT_SPEED);
-		data->player.position.pos_y = data->player.position.pos_y * cos(ROT_SPEED) + data->player.position.pos_x * sin(ROT_SPEED);
-		// data->player.position.pos_x = (int)(data->player.position.pos_x * cos(Phi * (PI / 180)) + data->player.position.pos_y * sin(Phi * (PI / 180)));
-		// data->player.position.pos_y = (int)(data->player.position.pos_x * cos(Phi * (PI / 180)) - data->player.position.pos_y * sin(Phi * (PI / 180)));
-	}
+void	move_right(t_data *data)
+{
+	data->player.angle_player += 0.1;
+	if (data->player.angle_player > 2 * M_PI)
+		data->player.angle_player -= 2 * M_PI;
+	data->player.direction.pos_x = cos(data->player.angle_player) * MOVE_SPEED;
+	data->player.direction.pos_y = sin(data->player.angle_player) * MOVE_SPEED;
+}
+
+void	move_left(t_data *data)
+{
+	data->player.angle_player -= 0.1;
+	if (data->player.angle_player < 0)
+		data->player.angle_player += 2 * M_PI;
+	data->player.direction.pos_x = cos(data->player.angle_player) * MOVE_SPEED;
+	data->player.direction.pos_y = sin(data->player.angle_player) * MOVE_SPEED;
 }
 
 int	input(int key, t_data *data)
@@ -61,19 +55,16 @@ int	input(int key, t_data *data)
 	if (key == KEY_ESC)
 		end_program(data);
 	if (key == KEY_UP)
-		moove_to(data, 1);
+		move_up(data);
 	if (key == KEY_DOWN)
-		moove_to(data, 2);
+		move_down(data);
 	if (key == KEY_LEFT)
-		moove_to(data, 3);
+		move_left(data);
 	if (key == KEY_RIGHT)
-		moove_to(data, 4);
-	if (key == KEY_POV_RIGHT)
-		moove_rot_to(data, 1);
-	if (key == KEY_POV_LEFT)
-		moove_rot_to(data, 2);
+		move_right(data);
+	// if (key == KEY_POV_RIGHT)
+	// 	moove_rot_to(data, 1);
+	// if (key == KEY_POV_LEFT)
+	// 	moove_rot_to(data, 2);
 	return (EXIT_SUCCESS);
 }
-
-// int x1= (int)(x*cos(Phi*(PI/180))-y*sin(Phi*(PI/180)));
-// int y1= (int)(x*cos(Phi*(PI/180))+y*sin(Phi*(PI/180)));
