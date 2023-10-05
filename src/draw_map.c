@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:44:35 by nibernar          #+#    #+#             */
-/*   Updated: 2023/10/02 17:29:06 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/10/05 11:41:13 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,54 +20,42 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	draw_square(t_data *data, int x, int y, int color)
-{
-	int	i;
-	int	j;
 
-	i = 0;
-	while (i < MAP_ZOOM)
+void	draw_square(t_data *data, int pos_y, int pos_x, int color)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < MAP_ZOOM)
 	{
-		j = 0;
-		while (j < MAP_ZOOM)
+		x = 0;
+		while (x < MAP_ZOOM)
 		{
-			if (!(x < 0 || y < 0 || x >= MAP_LENGTH || y >= MAP_WIDTH))
-				my_mlx_pixel_put(&data->img, y + i, x + j, color);
-			j++;
+			if (!(pos_y < 0 || pos_x < 0 || pos_y >= MAP_LENGTH || pos_x >= MAP_WIDTH))
+				my_mlx_pixel_put(&data->img, pos_x + y, pos_y + x, color);
+			x++;
 		}
-		i++;
+		y++;
 	}
 }
 
 void	draw_player(t_data *data)
 {
-	my_mlx_pixel_put(&data->img, data->player.position.pos_y, data->player.position.pos_x, 0x0066FF00);
+	float dx = abs(((int)data->player.position.pos_x + (int)data->player.direction.pos_x) - (int)data->player.position.pos_x);
+	float dy = abs(((int)data->player.position.pos_y + (int)data->player.direction.pos_y) - (int)data->player.position.pos_y);
+	float m = dy / dx;
+	int i = 0;
+	//dprintf(2, "pos_x = %d | pos_y = %d\np", (int)data->player.position.pos_x, (int)data->player.position.pos_y);
+	//dprintf(2, "pos_x + 1 = %d | pos_y + 1 = %d\np",(int)data->player.position.pos_x + (int)data->player.direction.pos_x, (int)data->player.position.pos_y + (int)data->player.direction.pos_y);
+	my_mlx_pixel_put(&data->img, data->player.position.pos_x, data->player.position.pos_y, 0x0066FF00);
+	while (i < 30)
+	{
+		my_mlx_pixel_put(&data->img, data->player.position.pos_x + m, data->player.position.pos_y + m, 0x00FFFF00);
+		i++;
+		m = m * (m + 1);
+	}
 }
-
-// static void	draw_player(t_data *data)
-// {
-// 	int	coma_i;
-// 	int	coma_j;
-// 	int	x;
-// 	int	y;
-
-// 	coma_i = (data->player.position.pos_x - floor(data->player.position.pos_x)) * 10;
-// 	coma_j = (data->player.position.pos_y - floor(data->player.position.pos_y)) * 10;
-// 	x = 2;
-// 	while (x < MAP_ZOOM - 2)
-// 	{
-// 		y = 2;
-// 		while (y < MAP_ZOOM - 2)
-// 		{
-// 			if (x + MINI_SIZE * MAP_ZOOM + coma_i >= 0 && y + MINI_SIZE * MAP_ZOOM + coma_j >= 0\
-// 			&& x + MINI_SIZE * MAP_ZOOM + coma_i < MAP_LENGTH && y + MINI_SIZE * MAP_ZOOM + coma_j < MAP_WIDTH)
-// 				((int *)data->img.addr)[((x + MINI_SIZE * MAP_ZOOM) + coma_i) * \
-// 				(data->img.line_length >> 2) + ((y + MINI_SIZE * MAP_ZOOM) + coma_j)] = 0x00003399;
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// }
 
 void	mlx_print_map(t_data *data)
 {

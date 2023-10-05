@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:43:28 by nicolasbern       #+#    #+#             */
-/*   Updated: 2023/10/03 15:14:38 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/10/05 11:08:00 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,26 @@ void    set_dir(t_data *data)
     if (data->player.dir == 'N')
     {
         data->player.angle_player = M_PI_2;
-        data->player.direction.pos_x = 1;
-        data->player.direction.pos_y = 0;
+        data->player.direction.pos_x = 0;
+        data->player.direction.pos_y = 1;
     }
     if (data->player.dir == 'S')
     {
         data->player.angle_player = - M_PI_2;
-        data->player.direction.pos_x = -1;
-        data->player.direction.pos_y = 0;
+        data->player.direction.pos_x = 0;
+        data->player.direction.pos_y = -1;
     }
     if (data->player.dir == 'E')
     {
         data->player.angle_player = 2 * M_PI;
-        data->player.direction.pos_x = 0;
-        data->player.direction.pos_y = 1;
+        data->player.direction.pos_x = 1;
+        data->player.direction.pos_y = 0;
     }
     if (data->player.dir == 'W')
     {
         data->player.angle_player = M_PI;
-        data->player.direction.pos_x = 0;
-        data->player.direction.pos_y = -1;
+        data->player.direction.pos_x = -1;
+        data->player.direction.pos_y = 0;
     }
 }
 
@@ -72,10 +72,13 @@ void   player_pos(t_data *data)
             {
                 data->player.dir = data->parsing.map[y][x];
                 data->parsing.map[y][x] = '0';
-                tmp_x = (float) y;
-                tmp_y = (float) x;
+                tmp_x = (float) x;
+                tmp_y = (float) y;
                 data->player.position.pos_x = tmp_x * MAP_ZOOM + MAP_ZOOM * 0.5;
                 data->player.position.pos_y = tmp_y * MAP_ZOOM + MAP_ZOOM * 0.5;
+                set_dir(data);
+                //dprintf(2, "y = %d  x = %d\n", y, x);
+                //dprintf(2, "y + 1 = %d  x + 1 = %d\n", y + (int)data->player.direction.pos_y, x + (int)data->player.direction.pos_x);
             }
            x++;
         }

@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:00:53 by nibernar          #+#    #+#             */
-/*   Updated: 2023/10/03 15:17:13 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/10/04 13:00:16 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	move_down(t_data *data)
 
 void	move_right(t_data *data)
 {
-	data->player.angle_player += 0.1;
+	data->player.angle_player += ROT_SPEED;
 	if (data->player.angle_player > 2 * M_PI)
 		data->player.angle_player -= 2 * M_PI;
 	data->player.direction.pos_x = cos(data->player.angle_player) * MOVE_SPEED;
@@ -42,7 +42,7 @@ void	move_right(t_data *data)
 
 void	move_left(t_data *data)
 {
-	data->player.angle_player -= 0.1;
+	data->player.angle_player -= ROT_SPEED;
 	if (data->player.angle_player < 0)
 		data->player.angle_player += 2 * M_PI;
 	data->player.direction.pos_x = cos(data->player.angle_player) * MOVE_SPEED;
@@ -51,7 +51,6 @@ void	move_left(t_data *data)
 
 int	input(int key, t_data *data)
 {
-	printf("%d\n", key);
 	if (key == KEY_ESC)
 		end_program(data);
 	if (key == KEY_UP)

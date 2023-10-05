@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 12:04:15 by nibernar          #+#    #+#             */
-/*   Updated: 2023/10/03 15:10:31 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/10/04 14:23:35 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define MAP_ZOOM 16
 # define MAP_LENGTH 1080
 # define MAP_WIDTH 850
-# define MOVE_SPEED 5
-# define ROT_SPEED 0.1
+# define MOVE_SPEED 7
+# define ROT_SPEED 8
 # define MINI_SIZE 10
 
 //linux
