@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
+/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:43:28 by nicolasbern       #+#    #+#             */
-/*   Updated: 2023/10/05 11:08:00 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/10/05 14:42:11 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,7 @@ void   player_pos(t_data *data)
                 data->player.position.pos_x = tmp_x * MAP_ZOOM + MAP_ZOOM * 0.5;
                 data->player.position.pos_y = tmp_y * MAP_ZOOM + MAP_ZOOM * 0.5;
                 set_dir(data);
-                //dprintf(2, "y = %d  x = %d\n", y, x);
-                //dprintf(2, "y + 1 = %d  x + 1 = %d\n", y + (int)data->player.direction.pos_y, x + (int)data->player.direction.pos_x);
-            }
+           }
            x++;
         }
         y++;

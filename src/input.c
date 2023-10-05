@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
+/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:00:53 by nibernar          #+#    #+#             */
-/*   Updated: 2023/10/04 13:00:16 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/10/05 14:37:41 by nibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	end_program(t_data *data)
 {
- 	mlx_destroy_window(data->mlx, data->mlx_window);
-	free_struct_parsing(&data->parsing);
+ 	//mlx_destroy_window(data->mlx, data->mlx_window);
+	//free_struct_parsing(&data->parsing);
 	exit(EXIT_FAILURE);
 }
 
