@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:44:35 by nibernar          #+#    #+#             */
-/*   Updated: 2023/10/07 15:03:42 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/10/07 23:06:24 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@ void	draw_player(t_data *data)
 {
 	float new_x = 0;
 	float new_y = 0;
-	float	theta = data->player.angle_player;
 	float	step = 1;
-	float	dx = cos(theta);
-	float	dy = sin(theta);
+	float	dx = cos(data->player.angle_player);
+	float	dy = sin(data->player.angle_player);
 	int i = -1;
 	my_mlx_pixel_put(&data->img, data->player.position.pos_x, data->player.position.pos_y, 0x0066FF00);
 	while (++i < 30)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+         #
+#    By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/23 12:02:24 by nibernar          #+#    #+#              #
-#    Updated: 2023/10/05 13:34:25 by nibernar         ###   ########.fr        #
+#    Updated: 2023/10/07 16:42:49 by nicolasbern      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,12 +59,12 @@ FLAG		=	-Wall -Wextra -Werror -g3
 MLX_FILE	=	libmlx.a
 
 # macOs
-# MLX_FLAG	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
-# MLX_PATH	=	./mlx_macos/
+MLX_FLAG	=	-L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
+MLX_PATH	=	./mlx_macos/
 
 #Linux
-MLX_FLAG	=	-L ./mlx_linux -lmlx -lXext -lX11 -lm -lbsd
-MLX_PATH	=	./mlx_linux/
+# MLX_FLAG	=	-L ./mlx_linux -lmlx -lXext -lX11 -lm -lbsd
+# MLX_PATH	=	./mlx_linux/
 
 MLX_LIB		=	$(addprefix $(MLX_PATH), $(MLX_FILE))
 MLX_EX		=	$(MLX_LIB) $(MLX_FLAG)

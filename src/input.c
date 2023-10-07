@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nibernar <nibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:00:53 by nibernar          #+#    #+#             */
-/*   Updated: 2023/10/07 15:03:22 by nibernar         ###   ########.fr       */
+/*   Updated: 2023/10/07 23:07:58 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,34 +21,40 @@ int	end_program(t_data *data)
 
 void	move_up(t_data *data)
 {
-	data->player.position.pos_x += data->player.direction.pos_x;
-	data->player.position.pos_y += data->player.direction.pos_y;
+	data->player.position.pos_x += data->player.direction.pos_x * MOVE_SPEED;
+	data->player.position.pos_y += data->player.direction.pos_y * MOVE_SPEED;
 }
 
 void	move_down(t_data *data)
 {
-	data->player.position.pos_x -= data->player.direction.pos_x;
-	data->player.position.pos_y -= data->player.direction.pos_y;
+	data->player.position.pos_x -= data->player.direction.pos_x * MOVE_SPEED;
+	data->player.position.pos_y -= data->player.direction.pos_y * MOVE_SPEED;
 }
 
 void	move_right(t_data *data)
 {
+	dprintf(2, "right\n");
   	double old_dir_x;
 
-	data->player.angle_player -= ROT_SPEED;
+	data->player.angle_player += ROT_SPEED;
+		if (data->player.angle_player > 2 * M_PI)
+		data->player.angle_player = 0;
 	old_dir_x = data->player.direction.pos_x;
-  	data->player.direction.pos_x = data->player.direction.pos_x * cos(data->player.angle_player) - data->player.direction.pos_y * sin(data->player.angle_player);
-  	data->player.direction.pos_y = old_dir_x * sin(data->player.angle_player) + data->player.direction.pos_y * cos(data->player.angle_player);
+  	data->player.direction.pos_x = data->player.direction.pos_x * cos(ROT_SPEED) - data->player.direction.pos_y * sin(ROT_SPEED);
+  	data->player.direction.pos_y = old_dir_x * sin(ROT_SPEED) + data->player.direction.pos_y * cos(ROT_SPEED);
 }
 
 void	move_left(t_data *data)
 {
+	dprintf(2, "left\n");
   	double old_dir_x;
 
-	data->player.angle_player += ROT_SPEED;
+	data->player.angle_player -= ROT_SPEED;
+	if (data->player.angle_player < -2 * M_PI)
+		data->player.angle_player = 0;
 	old_dir_x = data->player.direction.pos_x;
-  	data->player.direction.pos_x = data->player.direction.pos_x * cos(data->player.angle_player) - data->player.direction.pos_y * sin(data->player.angle_player);
-  	data->player.direction.pos_y = old_dir_x * sin(data->player.angle_player) + data->player.direction.pos_y * cos(data->player.angle_player);
+  	data->player.direction.pos_x = data->player.direction.pos_x * cos(-ROT_SPEED) - data->player.direction.pos_y * sin(-ROT_SPEED);
+  	data->player.direction.pos_y = old_dir_x * sin(-ROT_SPEED) + data->player.direction.pos_y * cos(-ROT_SPEED);
 }
 
 int	input(int key, t_data *data)
