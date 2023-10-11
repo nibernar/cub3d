@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 13:00:53 by nibernar          #+#    #+#             */
-/*   Updated: 2023/10/07 23:07:58 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/10/10 13:58:01 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	move_down(t_data *data)
 
 void	move_right(t_data *data)
 {
-	dprintf(2, "right\n");
   	double old_dir_x;
 
 	data->player.angle_player += ROT_SPEED;
@@ -46,7 +45,6 @@ void	move_right(t_data *data)
 
 void	move_left(t_data *data)
 {
-	dprintf(2, "left\n");
   	double old_dir_x;
 
 	data->player.angle_player -= ROT_SPEED;

@@ -6,7 +6,7 @@
 /*   By: nicolasbernard <nicolasbernard@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 12:04:15 by nibernar          #+#    #+#             */
-/*   Updated: 2023/10/07 23:09:16 by nicolasbern      ###   ########.fr       */
+/*   Updated: 2023/10/10 23:58:45 by nicolasbern      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define MOVE_SPEED 7
 # define ROT_SPEED 0.3
 # define MINI_SIZE 10
+# define FOV 45
 
 //linux
 // typedef enum e_key
@@ -93,6 +94,7 @@ typedef struct s_player
 	t_pos	position;
 	t_pos	direction;
 	float	angle_player;
+	double	angle_fov;
 	char	dir;
 }	t_player;
 
